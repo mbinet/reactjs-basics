@@ -75,16 +75,47 @@
 	    function App() {
 	        _classCallCheck(this, App);
 	
-	        return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
+	        var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this));
+	
+	        _this.state = {
+	            homeLink: "Home",
+	            homeMounted: true
+	        };
+	        return _this;
 	    }
 	
 	    _createClass(App, [{
+	        key: "onGreet",
+	        value: function onGreet() {
+	            alert("Hello!");
+	        }
+	    }, {
+	        key: "onChangeLinkName",
+	        value: function onChangeLinkName(newName) {
+	            this.setState({
+	                homeLink: newName
+	            });
+	        }
+	    }, {
+	        key: "onChangeHomeMounted",
+	        value: function onChangeHomeMounted() {
+	            this.setState({
+	                homeMounted: !this.state.homeMounted
+	            });
+	        }
+	    }, {
 	        key: "render",
 	        value: function render() {
-	            var user = {
-	                name: "Anna",
-	                hobbies: ["Sports", "bite", "jrigole"]
-	            };
+	            var homeCmp = "";
+	            if (this.state.homeMounted) {
+	                homeCmp = _react2.default.createElement(_Home.Home, {
+	                    name: "Max",
+	                    initialAge: 27,
+	                    greet: this.onGreet,
+	                    changeLink: this.onChangeLinkName.bind(this),
+	                    initialLinkName: this.state.homeLink
+	                });
+	            }
 	            return _react2.default.createElement(
 	                "div",
 	                { className: "container" },
@@ -94,7 +125,7 @@
 	                    _react2.default.createElement(
 	                        "div",
 	                        { className: "col-xs-10 col-xs-offset-1" },
-	                        _react2.default.createElement(_Header.Header, null)
+	                        _react2.default.createElement(_Header.Header, { homeLink: this.state.homeLink })
 	                    )
 	                ),
 	                _react2.default.createElement(
@@ -103,7 +134,20 @@
 	                    _react2.default.createElement(
 	                        "div",
 	                        { className: "col-xs-10 col-xs-offset-1" },
-	                        _react2.default.createElement(_Home.Home, { name: "Max", age: 27, user: user })
+	                        homeCmp
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    "div",
+	                    { className: "row" },
+	                    _react2.default.createElement(
+	                        "div",
+	                        { className: "col-xs-10 col-xs-offset-1" },
+	                        _react2.default.createElement(
+	                            "button",
+	                            { onClick: this.onChangeHomeMounted.bind(this), className: "btn btn-primary" },
+	                            "(Un)Mount Home Component"
+	                        )
 	                    )
 	                )
 	            );
@@ -22013,71 +22057,39 @@
 	});
 	exports.Header = undefined;
 	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
 	var _react = __webpack_require__(/*! react */ 1);
 	
 	var _react2 = _interopRequireDefault(_react);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var Header = exports.Header = function (_React$Component) {
-	    _inherits(Header, _React$Component);
-	
-	    function Header() {
-	        _classCallCheck(this, Header);
-	
-	        return _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).apply(this, arguments));
-	    }
-	
-	    _createClass(Header, [{
-	        key: "render",
-	        value: function render() {
-	            return _react2.default.createElement(
+	var Header = exports.Header = function Header(props) {
+	    return _react2.default.createElement(
+	        "div",
+	        { className: "navbar navbar-default" },
+	        _react2.default.createElement(
+	            "div",
+	            { className: "container" },
+	            _react2.default.createElement(
 	                "div",
-	                { className: "navbar navbar-default" },
+	                { className: "navbar-header" },
 	                _react2.default.createElement(
-	                    "div",
-	                    { className: "container" },
+	                    "ul",
+	                    { className: "nav navbar-nav" },
 	                    _react2.default.createElement(
-	                        "div",
-	                        { className: "navbar-header" },
+	                        "li",
+	                        null,
 	                        _react2.default.createElement(
-	                            "ul",
-	                            { className: "nav navbar-nav" },
-	                            _react2.default.createElement(
-	                                "li",
-	                                null,
-	                                _react2.default.createElement(
-	                                    "a",
-	                                    { href: "#" },
-	                                    "Home"
-	                                )
-	                            ),
-	                            _react2.default.createElement(
-	                                "li",
-	                                null,
-	                                _react2.default.createElement(
-	                                    "a",
-	                                    { href: "#" },
-	                                    "Two"
-	                                )
-	                            )
+	                            "a",
+	                            { href: "#" },
+	                            props.homeLink
 	                        )
 	                    )
 	                )
-	            );
-	        }
-	    }]);
-	
-	    return Header;
-	}(_react2.default.Component);
+	            )
+	        )
+	    );
+	};
 
 /***/ },
 /* 173 */
@@ -22110,15 +22122,88 @@
 	var Home = exports.Home = function (_React$Component) {
 	    _inherits(Home, _React$Component);
 	
-	    function Home() {
+	    function Home(props) {
 	        _classCallCheck(this, Home);
 	
-	        return _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).apply(this, arguments));
+	        var _this = _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this));
+	
+	        _this.state = {
+	            age: props.initialAge,
+	            status: 0,
+	            homeLink: props.initialLinkName
+	        };
+	        setTimeout(function () {
+	            _this.setState({
+	                status: 1
+	            });
+	        }, 3000);
+	        console.log("Constructor");
+	        return _this;
 	    }
 	
 	    _createClass(Home, [{
+	        key: "componentWillMount",
+	        value: function componentWillMount() {
+	            console.log("Component will mount");
+	        }
+	    }, {
+	        key: "componentDidMount",
+	        value: function componentDidMount() {
+	            console.log("Component did mount");
+	        }
+	    }, {
+	        key: "componentWillReceiveProps",
+	        value: function componentWillReceiveProps(nextProps) {
+	            console.log("Component will receive props", nextProps);
+	        }
+	    }, {
+	        key: "shouldComponentUpdate",
+	        value: function shouldComponentUpdate(nextProps, nextState) {
+	            console.log("Should component update", nextProps, nextState);
+	            // if (nextState.status === 1) {
+	            //     return false;
+	            // }
+	            return true;
+	        }
+	    }, {
+	        key: "componentWillUpdate",
+	        value: function componentWillUpdate(nextProps, nextState) {
+	            console.log("Component will update", nextProps, nextState);
+	        }
+	    }, {
+	        key: "componentDidUpdate",
+	        value: function componentDidUpdate(prevProps, prevState) {
+	            console.log("Component didi update", prevProps, prevState);
+	        }
+	    }, {
+	        key: "componentWillUnmount",
+	        value: function componentWillUnmount() {
+	            console.log("Conponent will unmount");
+	        }
+	    }, {
+	        key: "onMakeOlder",
+	        value: function onMakeOlder() {
+	            this.setState({
+	                age: this.state.age + 3
+	            });
+	        }
+	    }, {
+	        key: "onChangeLink",
+	        value: function onChangeLink() {
+	            this.props.changeLink(this.state.homeLink);
+	        }
+	    }, {
+	        key: "onHandleChange",
+	        value: function onHandleChange(event) {
+	            this.setState({
+	                homeLink: event.target.value
+	            });
+	        }
+	    }, {
 	        key: "render",
 	        value: function render() {
+	            var _this2 = this;
+	
 	            var age = this.props.age;
 	            return _react2.default.createElement(
 	                "div",
@@ -22132,29 +22217,37 @@
 	                    "p",
 	                    null,
 	                    "Your name is ",
-	                    this.props.user.name,
+	                    this.props.name,
 	                    ", your age is ",
-	                    age
+	                    this.state.age
 	                ),
 	                _react2.default.createElement(
-	                    "div",
+	                    "p",
 	                    null,
-	                    _react2.default.createElement(
-	                        "h4",
-	                        null,
-	                        "Hobbies"
-	                    ),
-	                    _react2.default.createElement(
-	                        "ul",
-	                        null,
-	                        this.props.user.hobbies.map(function (hobby, i) {
-	                            return _react2.default.createElement(
-	                                "li",
-	                                { key: i },
-	                                hobby
-	                            );
-	                        })
-	                    )
+	                    "Status: ",
+	                    this.state.status
+	                ),
+	                _react2.default.createElement("hr", null),
+	                _react2.default.createElement(
+	                    "button",
+	                    { onClick: this.onMakeOlder.bind(this), className: "btn btn-primary" },
+	                    "Make me older!"
+	                ),
+	                _react2.default.createElement("hr", null),
+	                _react2.default.createElement(
+	                    "button",
+	                    { onClick: this.props.greet, className: "btn btn-primary" },
+	                    "Greet"
+	                ),
+	                _react2.default.createElement("hr", null),
+	                _react2.default.createElement("input", { type: "text", value: this.state.homeLink,
+	                    onChange: function onChange(event) {
+	                        return _this2.onHandleChange(event);
+	                    } }),
+	                _react2.default.createElement(
+	                    "button",
+	                    { onClick: this.onChangeLink.bind(this), className: "btn btn-primary" },
+	                    "Change Header Link"
 	                )
 	            );
 	        }
@@ -22163,10 +22256,14 @@
 	    return Home;
 	}(_react2.default.Component);
 	
+	;
+	
 	Home.propTypes = {
-	    name: _react2.default.propTypes.string,
-	    age: _react2.default.propTypes.number,
-	    user: _react2.default.propTypes.object
+	    name: _react2.default.PropTypes.string,
+	    initialAge: _react2.default.PropTypes.number,
+	    greet: _react2.default.PropTypes.func,
+	    changeLink: _react2.default.PropTypes.func,
+	    initialLinkName: _react2.default.PropTypes.string
 	};
 
 /***/ }
